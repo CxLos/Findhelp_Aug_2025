@@ -41,7 +41,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 # df = data.copy()
 
 # Define the Google Sheets URL
-sheet_url = "https://docs.google.com/spreadsheets/d/1Vi5VQWt9AD8nKbO78FpQdm6TrfRmg0o7az77Hku2i7Y/edit#gid=78776635"
+sheet_url = "https://docs.google.com/spreadsheets/d/1GWnQrLptjkgg8CR1G8OpYaCHZMmW5xOzg0kFtPCkxKw/edit?gid=0#gid=0"
 
 # Define the scope
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
@@ -62,7 +62,7 @@ else:
 # Authorize and load the sheet
 client = gspread.authorize(creds)
 sheet = client.open_by_url(sheet_url)
-worksheet = sheet.worksheet("FH July 2025")
+worksheet = sheet.worksheet("August")
 data = pd.DataFrame(worksheet.get_all_records())
 df = data.copy()
 
@@ -1533,21 +1533,24 @@ app.layout = html.Div(
         html.Div(
             className='divv', 
             children=[ 
-            html.H1(
-                'FindHelp Report', 
-                className='title'),
-            html.H1(
-                f'{current_month} {report_year}', 
-                className='title2'),
-            html.Div(
-                className='btn-box', 
-                children=[
-                    html.A(
-                        'Repo',
-                        href=f'https://github.com/CxLos/FindHelp_{current_month}_{report_year}',
-                        className='btn'),
-                ]),
-    ]),  
+                html.H1(
+                    'FindHelp Report', 
+                    className='title'),
+                html.H1(
+                    f'{current_month} {report_year}', 
+                    className='title2'),
+                html.Div(
+                    className='btn-box', 
+                    children=[
+                        html.A(
+                            'Repo',
+                            href=f'https://github.com/CxLos/FindHelp_{current_month}_{report_year}',
+                            className='btn'
+                        ),
+                    ]
+                ),
+            ]
+        ),  
 
 # ============================ Rollups ========================== #
 
@@ -1555,15 +1558,16 @@ app.layout = html.Div(
 html.Div(
     className='rollup-row',
     children=[
+        
         html.Div(
-            className='rollup-box-l',
+            className='rollup-box-tl',
             children=[
                 html.Div(
                     className='title-box',
                     children=[
                         html.H3(
                             className='rollup-title',
-                            children=[f'{current_month} Reviews']
+                            children=[f'{current_month} Clients Served']
                         ),
                     ]
                 ),
@@ -1585,7 +1589,7 @@ html.Div(
             ]
         ),
         html.Div(
-            className='rollup-box-r',
+            className='rollup-box-tr',
             children=[
                 html.Div(
                     className='title-box',
@@ -1619,7 +1623,7 @@ html.Div(
 #     className='rollup-row',
 #     children=[
 #         html.Div(
-#             className='rollup-box-l',
+#             className='rollup-box-bl',
 #             children=[
 #                 html.Div(
 #                     className='title-box',
@@ -1635,7 +1639,7 @@ html.Div(
 #                     className='circle-box',
 #                     children=[
 #                         html.Div(
-#                             className='circle-1',
+#                             className='circle-3',
 #                             children=[
 #                                 html.H1(
 #                                 className='rollup-number',
@@ -1648,7 +1652,7 @@ html.Div(
 #             ]
 #         ),
 #         html.Div(
-#             className='rollup-box-r',
+#             className='rollup-box-br',
 #             children=[
 #                 html.Div(
 #                     className='title-box',
@@ -1663,7 +1667,7 @@ html.Div(
 #                     className='circle-box',
 #                     children=[
 #                         html.Div(
-#                             className='circle-1',
+#                             className='circle-4',
 #                             children=[
 #                                 html.H1(
 #                                 className='rollup-number',
