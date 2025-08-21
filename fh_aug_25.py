@@ -1544,7 +1544,7 @@ app.layout = html.Div(
                 children=[
                     html.A(
                         'Repo',
-                        href=f'https://github.com/CxLos/FindHelp_July_{report_year}',
+                        href=f'https://github.com/CxLos/FindHelp_{current_month}_{report_year}',
                         className='btn'),
                 ]),
     ]),  
@@ -1600,11 +1600,11 @@ html.Div(
                     className='circle-box',
                     children=[
                         html.Div(
-                            className='circle-1',
+                            className='circle-2',
                             children=[
                                 html.H1(
                                 className='rollup-number',
-                                # children=[]
+                                children=['-']
                                 ),
                             ]
                         )
