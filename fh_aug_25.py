@@ -1684,6 +1684,11 @@ html.Div(
     className='graph-container',
     children=[
         
+        html.H1(
+            className='visuals-text',
+            children='Visuals'
+        ),
+        
         html.Div(
             className='graph-row',
             children=[
