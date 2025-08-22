@@ -1782,7 +1782,31 @@ html.Div(
                     children=[
                         dcc.Graph(
                             className='graph',
+                            figure=benefits_pie
+                        )
+                    ]
+                ),
+            ]
+        ),
+        
+        html.Div(
+            className='graph-row',
+            children=[
+                html.Div(
+                    className='graph-box',
+                    children=[
+                        dcc.Graph(
+                            className='graph',
                             figure=support_bar
+                        )
+                    ]
+                ),
+                html.Div(
+                    className='graph-box',
+                    children=[
+                        dcc.Graph(
+                            className='graph',
+                            figure=support_pie
                         )
                     ]
                 ),
@@ -1798,6 +1822,54 @@ html.Div(
                         dcc.Graph(
                             className='graph',
                             figure=status_bar
+                        )
+                    ]
+                ),
+                html.Div(
+                    className='graph-box',
+                    children=[
+                        dcc.Graph(
+                            className='graph',
+                            figure=housing_pie
+                        )
+                    ]
+                ),
+            ]
+        ),
+        
+        html.Div(
+            className='graph-row',
+            children=[
+                html.Div(
+                    className='graph-box',
+                    children=[
+                        dcc.Graph(
+                            className='graph',
+                            figure=status_bar
+                        )
+                    ]
+                ),
+                html.Div(
+                    className='graph-box',
+                    children=[
+                        dcc.Graph(
+                            className='graph',
+                            figure=status_pie
+                        )
+                    ]
+                ),
+            ]
+        ),
+        
+        html.Div(
+            className='graph-row',
+            children=[
+                html.Div(
+                    className='graph-box',
+                    children=[
+                        dcc.Graph(
+                            className='graph',
+                            figure=housing_bar
                         )
                     ]
                 ),
