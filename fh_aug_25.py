@@ -1996,7 +1996,7 @@ html.Div(
 print(f"Serving Flask app '{current_file}'! 🚀")
 
 if __name__ == '__main__':
-    app.run_server(debug=
+    app.run(debug=
                    True)
                 #    False)
                 
