@@ -20,7 +20,7 @@ import folium
 from folium.plugins import MousePosition
 
 import dash
-from dash import dcc, html
+from dash import dcc, html, dash_table
 
 # Google Web Credentials
 import json
@@ -1488,6 +1488,18 @@ df['ZIP Code:'] = df['ZIP Code:'].fillna(mode_value)
 
 # ========================== DataFrame Table ========================== #
 
+df = df.sort_values('created_at', ascending=True)
+
+# create a display index column and prepare table data/columns
+# reset index to ensure contiguous numbering after any filtering/sorting upstream
+df_indexed = df.reset_index(drop=True).copy()
+# Insert '#' as the first column (1-based row numbers)
+df_indexed.insert(0, '#', df_indexed.index + 1)
+
+# Convert to records for DataTable
+data = df_indexed.to_dict('records')
+columns = [{"name": col, "id": col} for col in df_indexed.columns]
+
 df_table = go.Figure(data=[go.Table(
     columnwidth=[200] * len(df.columns),   # give each column 200px width
     header=dict(
@@ -1975,20 +1987,52 @@ html.Div(
         className='data-box',
         children=[
             html.H1(
-                className='table-title-text',
-                children='Findhelp Table'
+                className='data-title',
+                children=f'Findhelp Table'
             ),
-            html.Div(  
-                className='table-scroll',
-                children=[
-                    dcc.Graph(
-                        className='data',
-                        figure=df_table,
-                            # style={'height': '800px'}, 
-                            config={'responsive': True}
-                    )
+            dash_table.DataTable(
+                id='applications-table',
+                data=data,
+                columns=columns,
+                page_size=10,
+                sort_action='native',
+                filter_action='native',
+                row_selectable='multi',
+                style_table={
+                    'overflowX': 'auto',
+                    # 'border': '3px solid #000',
+                    # 'borderRadius': '0px'
+                },
+                style_cell={
+                    'textAlign': 'left',
+                    'minWidth': '100px', 
+                    'whiteSpace': 'normal'
+                },
+                style_header={
+                    'textAlign': 'center', 
+                    'fontWeight': 'bold',
+                    'backgroundColor': '#34A853', 
+                    'color': 'white'
+                },
+                style_data={
+                    'whiteSpace': 'normal',
+                    'height': 'auto',
+                },
+                style_cell_conditional=[
+                    # make the index column narrow and centered
+                    {'if': {'column_id': '#'},
+                    'width': '20px', 'minWidth': '60px', 'maxWidth': '60px', 'textAlign': 'center'},
+
+                    {'if': {'column_id': 'Description'},
+                    'width': '350px', 'minWidth': '200px', 'maxWidth': '400px'},
+
+                    {'if': {'column_id': 'Tags'},
+                    'width': '250px', 'minWidth': '200px', 'maxWidth': '400px'},
+
+                    {'if': {'column_id': 'Collab'},
+                    'width': '250px', 'minWidth': '200px', 'maxWidth': '400px'},
                 ]
-            )
+            ),
         ]
     ),
 ])
